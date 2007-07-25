@@ -30,6 +30,15 @@ somewhere in your HTML header.
 
 ==Usage Examples
 
+First, make sure that the shortcuts helper is available to your views and helpers. Include it in application_helper.rb:
+
+  module ApplicationHelper
+    include ShortcutsHelper
+    ...
+  end
+
+You can now use the helper methods in all your views:
+
 To register a navigation shortcut:
 
   <%= shortcut 'p', projects_url %>
