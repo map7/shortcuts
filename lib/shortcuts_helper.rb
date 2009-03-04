@@ -27,4 +27,14 @@ module ShortcutsHelper
     javascript_tag("Shortcuts.register_shortcut_ctrl('#{key}', function() { #{ function } });")
   end
 
+  # Used to jump to locations using Fnkey
+  def shortcut_fnkey key, url
+    shortcut_fnkey_function key, "document.location.href='#{url}';"
+  end
+
+  # Used to jump to locations using Fnkey
+  def shortcut_fnkey_function key, function
+    javascript_tag("Shortcuts.register_shortcut_fnkey('#{key}', function() { #{ function } });")
+  end
+
 end

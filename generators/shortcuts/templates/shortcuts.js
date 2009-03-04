@@ -20,6 +20,14 @@ Object.extend(Shortcuts, {
 		this.shortcut_ctrls[key] = handler;
 	},
 
+	// Function keys (Key should equal the function key number, EG: F4 would be '4')
+        register_shortcut_fnkey: function( key, handler ) {
+		if (!this.shortcut_fnkeys)
+		    this.shortcut_fnkeys=[];
+
+		this.shortcut_fnkeys[key] = handler;
+	},
+
 	go:function(key) {
 		handler = Shortcuts.shortcuts[character];
 		if (handler) {
@@ -35,7 +43,23 @@ Object.extend(Shortcuts, {
 				else if (e.srcElement) target = e.srcElement;
 				if (target.nodeType == 3) // defeat Safari bug
 					target = target.parentNode;
+
+				// Function Keys
+				if (e.keyCode >= 112 && e.keyCode <= 123){
+
+
+				    fnKey= e.keyCode - 111   // Calculate which Function Key number was pressed.
 		
+				    // Call the handler for the function key.
+				    handler = Shortcuts.shortcut_fnkeys[fnKey];
+
+				    if (handler) {
+					e.preventDefault();      // Stop the browser function, if user you override with a different function.
+					Event.stop(e);
+					handler(character);
+				    }
+				}
+
 				// For ctrl shortcuts Ctrl + <character>
 				if (e.ctrlKey){
 

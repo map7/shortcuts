@@ -60,3 +60,6 @@ For details, refer to the inline documentation for ShortcutsHelper.
 Control Key shortcuts
   <%= shortcut_ctrl 'b', '/' + controller.controller_name %>     
   <%= shortcut_ctrl_function 'a', 'alert("<Ctrl-a> pushed");' %> 
+
+Function Keys
+  <%= shortcut_fnkey_function '4', 'alert("F4 pressed");' %> 
