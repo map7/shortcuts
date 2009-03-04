@@ -9,7 +9,7 @@ Tested on Firefox, Safari, IE 6 and IE 7.
 
 Install with
 
-  script/plugin install svn://rubyforge.org/var/svn/rails-oceania/shortcuts/trunk
+  script/plugin install git://github.com/map7/shortcuts.git 
 
 To prepare your application, run
 
@@ -28,14 +28,16 @@ or
 somewhere in your HTML header.
 
 
-==Usage Examples
-
 First, make sure that the shortcuts helper is available to your views and helpers. Include it in application_helper.rb:
 
   module ApplicationHelper
     include ShortcutsHelper
     ...
   end
+
+
+==Usage Examples
+
 
 You can now use the helper methods in all your views:
 
@@ -52,3 +54,5 @@ To register an arbitrary javascript function:
   <%= shortcut_function 'a', "alert('hello world');" %>
 
 For details, refer to the inline documentation for ShortcutsHelper.
+
+  <%= shortcut 'a', controller.controller_name + '/new' %>     <!-- New item for the current controller, could be put into application.html.erb -->
