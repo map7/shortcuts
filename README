@@ -56,3 +56,7 @@ To register an arbitrary javascript function:
 For details, refer to the inline documentation for ShortcutsHelper.
 
   <%= shortcut 'a', controller.controller_name + '/new' %>     <!-- New item for the current controller, could be put into application.html.erb -->
+
+Control Key shortcuts
+  <%= shortcut_ctrl 'b', '/' + controller.controller_name %>     
+  <%= shortcut_ctrl_function 'a', 'alert("<Ctrl-a> pushed");' %> 

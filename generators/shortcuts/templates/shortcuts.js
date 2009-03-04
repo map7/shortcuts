@@ -12,6 +12,14 @@ Object.extend(Shortcuts, {
 		this.shortcuts[key] = handler;
 	},
 	
+	// Control key + shortcut.
+        register_shortcut_ctrl: function( key, handler ) {
+		if (!this.shortcut_ctrls)
+		    this.shortcut_ctrls=[];
+
+		this.shortcut_ctrls[key] = handler;
+	},
+
 	go:function(key) {
 		handler = Shortcuts.shortcuts[character];
 		if (handler) {
@@ -28,6 +36,25 @@ Object.extend(Shortcuts, {
 				if (target.nodeType == 3) // defeat Safari bug
 					target = target.parentNode;
 		
+				// For ctrl shortcuts Ctrl + <character>
+				if (e.ctrlKey){
+
+				    if (e.keyCode) code = e.keyCode;
+				    else if (e.which) code = e.which;
+
+				    // Get the character attached to the Ctrl sequence and turn that into lowercase
+				    var character = String.fromCharCode(code).toLowerCase();
+		
+				    // Call the handler for the ctrl
+				    handler = Shortcuts.shortcut_ctrls[character];
+
+				    if (handler) {
+					Event.stop(e);
+					handler(character);
+				    }
+				}
+
+
 				if (target.tagName.toLowerCase()!='input' && target.tagName.toLowerCase()!='textarea') {
 					var code;
 					if (e.keyCode) code = e.keyCode;
