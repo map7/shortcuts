@@ -58,6 +58,8 @@ Object.extend(Shortcuts, {
 					Event.stop(e);
 					handler(character);
 				    }
+
+				    return;
 				}
 
 				// For ctrl shortcuts Ctrl + <character>
