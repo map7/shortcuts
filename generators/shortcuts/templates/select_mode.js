@@ -13,6 +13,15 @@ At the end of your template have:
 Your table with rows must have a name which corresponds with what you put in your setup.  In this example it would be:
   <table id=listing>
 
+Handy to have the following in your application.js
+function hide_all(){
+    clear();
+    $('ajaxForm').hide();
+}
+
+This allows you to hide a div called ajaxForm and clear all the highlighted rows.
+
+
 
 Examples:
 
@@ -49,13 +58,20 @@ function setup(listDiv){
 function highlight(row){
     selRow = row
 
+    clear();
+
     for(i = 1; i < rows.length; i++){          
 	if (row == i)
 	    rows[row].className = "highlight";	
-	else
-	    rows[i].className = "";
     }
 
+}
+
+// Clear all highlighting from a table.
+function clear(){
+    for(i = 1; i < rows.length; i++){          
+	rows[i].className = "";
+    }
 }
 
 // Run action on row
