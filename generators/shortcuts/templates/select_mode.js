@@ -47,10 +47,10 @@ var rows;
 var selRow;
 
 // Setup variables to be used to hightlight and run row commands
-function setup(listDiv){
+function setup(listTable){
     // Detect if div exists and then fill out the variables
-    if(document.getElementsByTagName && document.getElementById(listDiv))
-	rows = $(listDiv).getElementsByTagName("tr"); 
+    if(document.getElementsByTagName && document.getElementById(listTable))
+	rows = $(listTable).getElementsByTagName("tr"); 
 
 }
 
