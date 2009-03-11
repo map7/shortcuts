@@ -63,3 +63,12 @@ Control Key shortcuts
 
 Function Keys
   <%= shortcut_fnkey_function '4', 'alert("F4 pressed");' %> 
+
+
+
+
+==Running Tests
+
+Sit in the plugins root directory and type 'rake'
+
+This will run the unit tests in the test directory.
