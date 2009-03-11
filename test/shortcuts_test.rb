@@ -1,6 +1,9 @@
 require 'test/unit'
 require 'shortcuts_helper'
 
+#
+# Original Tests
+#
 class ShortcutsTest < Test::Unit::TestCase
   include ShortcutsHelper
 
@@ -8,11 +11,11 @@ class ShortcutsTest < Test::Unit::TestCase
     result = shortcut_function('a', "alert('hello world');")
     assert result == "<script>Shortcuts.register_shortcut('a', function() { alert('hello world'); });</script>"
   end
-  
+
   protected
-  
+
   def javascript_tag content
     "<script>#{content}</script>"
   end
-  
+
 end
