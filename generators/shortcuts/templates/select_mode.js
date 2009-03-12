@@ -1,6 +1,9 @@
 /*
 Author: Michael Pope
-Desc:   Allows Highlighting of rows & execution of links on that row by ID
+Desc:   
+  Allows Highlighting of rows & execution of links on that row by ID
+  Jumps focus to a set of commonly used predefined fields
+
 
 Requirements:
 
