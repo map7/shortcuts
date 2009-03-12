@@ -46,9 +46,10 @@ Examples:
 var rows;
 var selRow;
 
-var jump;  // Array of fields which you can bind a jump key.  Jump will allow you to quickly jump to common fields, unlike tab which will go through each.
+var jumps = [];  // Array of fields which you can bind a jump key.  Jump will allow you to quickly jump to common fields, unlike tab which will go through each.
 
 var focusedElement = null;
+var form = null;
 
 // Setup variables to be used to hightlight and run row commands
 function setup(listTable){
@@ -93,21 +94,23 @@ function runSelectedAjax(id){
 
 
 // Setup the jump fields.
-function setupJump(jump_fields){
+function setupJumps(theForm, jumpFields){
     // Setup the global variable 'jump'
-    jump = jump_fields;
+    form = theForm;
 
-    // Select the first field
-    $(jump[0]).focus();
-    $(jump[0]).select();
+    for (i = 0; i < jumpFields.length; i++){
+	jumps.push($(jumpFields[i]));  // Add the field objects to an array
+    }
 
     // Setup an observer on all fields to detect which is focused.
     setupObserve();
+
+    // Select the first field
+    $(jumps[0].id).focus();
+    $(jumps[0].id).select();
 }
 
-
-
-
+// Setup a focus observer on all fields to detect which field is focused.
 function setupObserve(){
 
     $$('input, select, textarea').each(function(e){
@@ -125,13 +128,36 @@ function setupObserve(){
 
 // Jump to the next field.  Bind this to a shortcut key.
 function jumpNext(){
-    alert(focusedElement.id);
+    jumpDone = false;
 
-    // Get the currently focused field
 
-    // Workout what number field the currently focused one is from the top.
+    // Get the current focused element.
+    currentField = focusedElement;
+
+    // Get all fields for the form.
+    fields = $(form).getElements();
+
+    // Workout what number field the currently focused one is from the top. 'focusedElement'
+    position = fields.indexOf(currentField);
 
     // Work out which field in the jump array would be next
+    for (i = 0; i < jumps.length; i++){
+	jump = fields.indexOf(jumps[i]);
+	
+	// select that field
+	if (jump > position){
+	    $(jumps[i]).focus();  // Jump to the next fiel
+	    $(jumps[i]).select();
+	    jumpDone = true;
 
-    // select that field
+	    break;        // Break out of the for loop
+	}
+    }
+    
+    // Jump to the first entry if no jump has been done.
+    if (!jumpDone){
+	$(jumps[0].id).focus();
+	$(jumps[0].id).select();
+    }
+
 }
