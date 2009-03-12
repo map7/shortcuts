@@ -1,3 +1,20 @@
+/*
+shortcuts.js
+Desc:   
+  Allows you to bind functions to shortcut keys.
+
+Requirements:
+
+If you want to override the behaviour of the 'Enter' key then add this to the application.html.erb
+  <script>overrideEnter();</script>
+ */
+
+var changeEnter = false;
+
+function overrideEnter(){
+    changeEnter = true;
+}
+
 if (!window.Shortcuts) {
   var Shortcuts = new Object();
 }
@@ -80,8 +97,9 @@ Object.extend(Shortcuts, {
 				    }
 				}
 
+				
 
-				if (e.keyCode == 27 || target.tagName.toLowerCase()!='input' && target.tagName.toLowerCase()!='textarea'  && target.tagName.toLowerCase()!='select') {
+				if (changeEnter && e.keyCode == 13 && target.type.toLowerCase()!='submit' || e.keyCode == 27 || target.tagName.toLowerCase()!='input' && target.tagName.toLowerCase()!='textarea'  && target.tagName.toLowerCase()!='select') {
 					var code;
 					if (e.keyCode) code = e.keyCode;
 					else if (e.which) code = e.which;

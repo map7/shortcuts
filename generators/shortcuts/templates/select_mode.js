@@ -49,6 +49,7 @@ Examples:
 var rows;
 var selRow;
 
+var fields;      // Store all fields from the form into an array.
 var jumps = [];  // Array of fields which you can bind a jump key.  Jump will allow you to quickly jump to common fields, unlike tab which will go through each.
 
 var focusedElement = null;
@@ -96,6 +97,10 @@ function runSelectedAjax(id){
 
 
 
+
+
+
+
 // Setup the jump fields.
 function setupJumps(theForm, jumpFields){
     // Setup the global variable 'jump'
@@ -133,7 +138,6 @@ function setupObserve(){
 function jumpNext(){
     jumpDone = false;
 
-
     // Get the current focused element.
     currentField = focusedElement;
 
@@ -162,5 +166,26 @@ function jumpNext(){
 	$(jumps[0].id).focus();
 	$(jumps[0].id).select();
     }
+}
 
+// Select the next field
+function nextField(){
+
+    // Get the current focused element.
+    currentField = focusedElement;
+
+    // Get current position within array of all input fields
+    fields = $(form).getElements();
+    position = fields.indexOf(currentField);
+
+    // select the next field in the array
+    if (position + 1 < fields.length){
+	nField = fields[position + 1];
+    }else{
+	nField = fields[position];
+    }
+
+    // Focus & Select the next field
+    $(nField.id).focus();
+    $(nField.id).select();
 }
