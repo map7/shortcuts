@@ -46,6 +46,10 @@ Examples:
 var rows;
 var selRow;
 
+var jump;  // Array of fields which you can bind a jump key.  Jump will allow you to quickly jump to common fields, unlike tab which will go through each.
+
+var focusedElement = null;
+
 // Setup variables to be used to hightlight and run row commands
 function setup(listTable){
     // Detect if div exists and then fill out the variables
@@ -84,4 +88,50 @@ function runSelected(id){
 function runSelectedAjax(id){
     links = rows[selRow].getElementsByTagName("a");  // Get the links
     $(links[id]).onclick(); //For Ajax
+}
+
+
+
+// Setup the jump fields.
+function setupJump(jump_fields){
+    // Setup the global variable 'jump'
+    jump = jump_fields;
+
+    // Select the first field
+    $(jump[0]).focus();
+    $(jump[0]).select();
+
+    // Setup an observer on all fields to detect which is focused.
+    setupObserve();
+}
+
+
+
+
+function setupObserve(){
+
+    $$('input, select, textarea').each(function(e){
+	    e.observe('focus',function(e){
+		    return function() { focusedElement = e; }
+                }(e));
+	    e.observe('blur',function(e){
+		    return function() {
+			if (focusedElement==e)
+			    focusedElement = null;
+		    }
+                }(e));
+        });
+}
+
+// Jump to the next field.  Bind this to a shortcut key.
+function jumpNext(){
+    alert(focusedElement.id);
+
+    // Get the currently focused field
+
+    // Workout what number field the currently focused one is from the top.
+
+    // Work out which field in the jump array would be next
+
+    // select that field
 }
