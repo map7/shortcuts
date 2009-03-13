@@ -25,6 +25,10 @@ function hide_all(){
 This allows you to hide a div called ajaxForm and clear all the highlighted rows.
 
 
+Any updated partials must include the following at the end of the partial:
+<script>setupObserve();</script>
+
+
 
 Examples:
 
@@ -49,7 +53,7 @@ Examples:
 var rows;
 var selRow;
 
-var fields;      // Store all fields from the form into an array.
+var fields = [];      // Store all fields from the form into an array.
 var jumps = [];  // Array of fields which you can bind a jump key.  Jump will allow you to quickly jump to common fields, unlike tab which will go through each.
 
 var focusedElement = null;
@@ -105,17 +109,26 @@ function runSelectedAjax(id){
 function setupJumps(theForm, jumpFields){
     // Setup the global variable 'jump'
     form = theForm;
+    jumps = jumpFields;
 
+    theFields = $(form).getElements();
+    for (i = 1; i < theFields.length; i++){    
+	fields.push($(theFields[i]).id);
+    }
+
+    /*
     for (i = 0; i < jumpFields.length; i++){
 	jumps.push($(jumpFields[i]));  // Add the field objects to an array
     }
+    */
+
 
     // Setup an observer on all fields to detect which is focused.
     setupObserve();
 
     // Select the first field
-    $(jumps[0].id).focus();
-    $(jumps[0].id).select();
+    $(jumps[0]).focus();
+    $(jumps[0]).select();
 }
 
 // Setup a focus observer on all fields to detect which field is focused.
@@ -142,10 +155,10 @@ function jumpNext(){
     currentField = focusedElement;
 
     // Get all fields for the form.
-    fields = $(form).getElements();
+    //fields = $(form).getElements();
 
     // Workout what number field the currently focused one is from the top. 'focusedElement'
-    position = fields.indexOf(currentField);
+    position = fields.indexOf(currentField.id);
 
     // Work out which field in the jump array would be next
     for (i = 0; i < jumps.length; i++){
@@ -163,8 +176,8 @@ function jumpNext(){
     
     // Jump to the first entry if no jump has been done.
     if (!jumpDone){
-	$(jumps[0].id).focus();
-	$(jumps[0].id).select();
+	$(jumps[0]).focus();
+	$(jumps[0]).select();
     }
 }
 
@@ -175,8 +188,9 @@ function nextField(){
     currentField = focusedElement;
 
     // Get current position within array of all input fields
-    fields = $(form).getElements();
-    position = fields.indexOf(currentField);
+    //    fields = $(form).getElements();
+
+    position = fields.indexOf(currentField.id);
 
     // select the next field in the array
     if (position + 1 < fields.length){
@@ -186,6 +200,6 @@ function nextField(){
     }
 
     // Focus & Select the next field
-    $(nField.id).focus();
-    $(nField.id).select();
+    $(nField).focus();
+    $(nField).select();
 }
