@@ -111,17 +111,12 @@ function setupJumps(theForm, jumpFields){
     form = theForm;
     jumps = jumpFields;
 
+    // Get all the fields from the form and convert them from objects to id's.
+    // Note:  Id's are better as they tend to be more stable on partial updates.
     theFields = $(form).getElements();
     for (i = 1; i < theFields.length; i++){    
 	fields.push($(theFields[i]).id);
     }
-
-    /*
-    for (i = 0; i < jumpFields.length; i++){
-	jumps.push($(jumpFields[i]));  // Add the field objects to an array
-    }
-    */
-
 
     // Setup an observer on all fields to detect which is focused.
     setupObserve();
@@ -153,9 +148,6 @@ function jumpNext(){
 
     // Get the current focused element.
     currentField = focusedElement;
-
-    // Get all fields for the form.
-    //fields = $(form).getElements();
 
     // Workout what number field the currently focused one is from the top. 'focusedElement'
     position = fields.indexOf(currentField.id);
