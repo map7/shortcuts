@@ -7,6 +7,9 @@ Requirements:
 
 If you want to override the behaviour of the 'Enter' key then add this to the application.html.erb
   <script>overrideEnter();</script>
+
+Note if you have 'hidden' fields and you want to override the Enter key then you must have these hidden fields as the first fields in your form.
+
  */
 
 var changeEnter = false;
