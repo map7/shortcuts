@@ -18,7 +18,7 @@ Your table with rows must have a name which corresponds with what you put in you
 
 Handy to have the following in your application.js
 function hide_all(){
-    clear();
+    clearHighlight();
     $('ajaxForm').hide();
 }
 
@@ -71,7 +71,7 @@ function setup(listTable){
 function highlight(row){
     selRow = row
 
-    clear();
+    clearHighlight();
 
     for(i = 1; i < rows.length; i++){          
 	if (row == i)
@@ -81,7 +81,7 @@ function highlight(row){
 }
 
 // Clear all highlighting from a table.
-function clear(){
+function clearHighlight(){
     for(i = 1; i < rows.length; i++){          
 	rows[i].className = "";
     }
