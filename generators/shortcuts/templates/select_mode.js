@@ -103,6 +103,7 @@ function runSelectedAjax(id){
 }
 
 // Run action on row (AJAX) by name.
+// This can only be done for AJAX links.
 function runSelectedAjaxName(name){
     links = rows[selRow].getElementsByTagName("a");  // Get the links
 
@@ -115,7 +116,6 @@ function runSelectedAjaxName(name){
     }
 
 }
-
 
 
 
