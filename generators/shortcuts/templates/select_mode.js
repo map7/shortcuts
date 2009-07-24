@@ -102,8 +102,23 @@ function runSelectedAjax(id){
     $(links[id]).onclick(); //For Ajax
 }
 
+// Run action on row by name.
+// You have to define :method on your link eg:
+// link_to 'Show', {:action => 'show', :id => category}, :id => "show", :method => :get
+function runSelectedName(name){
+    links = rows[selRow].getElementsByTagName("a");  // Get the links
+
+    // Step through each link
+    for(i=0;i<=links.length - 1;i++){
+
+	// If the link matches the search criteria then click on it.
+	if (links[i].id == name)
+	    $(links[i]).onclick();
+    }
+
+}
+
 // Run action on row (AJAX) by name.
-// This can only be done for AJAX links.
 function runSelectedAjaxName(name){
     links = rows[selRow].getElementsByTagName("a");  // Get the links
 
