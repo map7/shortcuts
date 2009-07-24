@@ -7,6 +7,9 @@ Desc:
 
 Requirements:
 
+Add to your template:
+  <%= javascript_include_tag 'prototype', 'select_mode' %>
+
 Must have a stylesheet loaded in your template which includes:
   .highlight { background: yellow } 
 
