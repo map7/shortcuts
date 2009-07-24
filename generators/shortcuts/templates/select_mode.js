@@ -99,6 +99,19 @@ function runSelectedAjax(id){
     $(links[id]).onclick(); //For Ajax
 }
 
+// Run action on row (AJAX) by name.
+function runSelectedAjaxName(name){
+    links = rows[selRow].getElementsByTagName("a");  // Get the links
+
+    // Step through each link
+    for(i=0;i<=links.length - 1;i++){
+
+	// If the link matches the search criteria then click on it.
+	if (links[i].id == name)
+	    $(links[i]).onclick();
+    }
+
+}
 
 
 
@@ -129,7 +142,7 @@ function setupJumps(theForm, jumpFields){
 // Setup a focus observer on all fields to detect which field is focused.
 function setupObserve(){
 
-    $$('input, select, textarea').each(function(e){
+    $$('input, select, textarea, checkbox').each(function(e){
 	    e.observe('focus',function(e){
 		    return function() { focusedElement = e; }
                 }(e));
