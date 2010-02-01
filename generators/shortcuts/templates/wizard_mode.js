@@ -30,7 +30,7 @@ function setupForm(formName){
 
     // Go through each of the buttons and split them up.
     for(i=0;i<=buttons.length -1; i++){
-	if (buttons[i].id == 'next')
+	if (buttons[i].id == 'next') 
 	    nextBtns.push(buttons[i]);
 
 	if (buttons[i].id == 'prev')
@@ -40,7 +40,7 @@ function setupForm(formName){
 
 }
 
-function nextPage(){
+function nextWizardPage(){
     // Go to the next page.
     if (page < nextBtns.length){
 	nextBtns[page].onclick();
@@ -48,7 +48,7 @@ function nextPage(){
     }
 }
 
-function prevPage(){
+function prevWizardPage(){
     // Go to the prev page.
     if (page > 0){
 	prevBtns[page - 1].onclick();
