@@ -4,6 +4,7 @@ Desc:
   Allows Highlighting of rows & execution of links on that row by ID
   Jumps focus to a set of commonly used predefined fields
 
+  This plugin requires prototype.
 
 Requirements:
 
@@ -62,6 +63,8 @@ var jumps = [];  // Array of fields which you can bind a jump key.  Jump will al
 var focusedElement = null;
 var form = null;
 
+var trigger = null;
+
 // Setup variables to be used to hightlight and run row commands
 function setup(listTable){
     // Detect if div exists and then fill out the variables
@@ -115,7 +118,6 @@ function runSelectedName(name){
 	if (links[i].id == name)
 	    $(links[i]).onclick();
     }
-
 }
 
 // Run action on row (AJAX) by name.
@@ -129,10 +131,7 @@ function runSelectedAjaxName(name){
 	if (links[i].id == name)
 	    $(links[i]).onclick();
     }
-
 }
-
-
 
 
 
@@ -206,7 +205,6 @@ function jumpNext(){
 
 // Select the next field
 function nextField(){
-
     // Get the current focused element.
     currentField = focusedElement;
 
@@ -215,14 +213,26 @@ function nextField(){
 
     position = fields.indexOf(currentField.id);
 
-    // select the next field in the array
-    if (position + 1 < fields.length){
-	nField = fields[position + 1];
-    }else{
-	nField = fields[position];
-    }
 
-    // Focus & Select the next field
-    $(nField).focus();
-    $(nField).select();
+    if (trigger == currentField.id && changeEnter) {
+	$('form').request(); // Post the form.
+    } else {
+
+	// select the next field in the array
+	if (position + 1 < fields.length){
+	    nField = fields[position + 1];
+	}else{
+	    nField = fields[position];
+	}
+
+	// Focus & Select the next field
+	$(nField).focus();
+	$(nField).select();
+    }
+}
+
+// Setting a trigger field will enable your enter key 
+// to submit the form when it hits that field
+function setTriggerField(name){
+    trigger = name;
 }
